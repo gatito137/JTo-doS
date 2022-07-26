@@ -46,7 +46,7 @@ public class Tasks extends javax.swing.JPanel {
         
         m.use.query.setLength(0);
         if(TaskCode == 0){
-            m.use.query.append("insert into Tasks(Task, Description, Status) ");
+            m.use.query.append("insert into Tasks(Task, Description, StatusCode) ");
             m.use.query.append("values(");
             m.use.query.append(txtTask.getText()).append(", '");
             m.use.query.append(txtDescription.getText()).append("', ");
@@ -54,7 +54,7 @@ public class Tasks extends javax.swing.JPanel {
             m.use.query.append(");");
         }else{
             m.use.query.append("update Tasks set ");
-            m.use.query.append("Status = (select StatusCode from Status where Description = '").append(lstStatus.getSelectedItem()).append("'), ");
+            m.use.query.append("StatusCode = (select StatusCode from Status where Description = '").append(lstStatus.getSelectedItem()).append("'), ");
             m.use.query.append("Description = '").append(txtDescription.getText()).append("' ");
             m.use.query.append("where StatusCode = ").append(TaskCode).append(";");
         }
