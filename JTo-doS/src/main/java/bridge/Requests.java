@@ -22,6 +22,8 @@ public class Requests extends connection.CrudMySql{
     public void fillList(String query, JComboBox List){
         Buffer.setRowCount(0);
         Buffer.setColumnCount(0);
+        List.removeAllItems();
+        List.addItem("");
         
         super.getQuery(query, Buffer);
         
@@ -36,11 +38,30 @@ public class Requests extends connection.CrudMySql{
         
         super.getQuery(query, Buffer);
         
+        if(Buffer.getRowCount() == 0){
+            return Error;
+        }
+        
         try{
             Error = Integer.parseInt(Buffer.getValueAt(0, 0).toString());
         }catch(NumberFormatException e){}
         
         return Error;
+    }
+    
+    public String getVal(String query){
+        Buffer.setColumnCount(0);
+        Buffer.setRowCount(0);
+        
+        super.getQuery(query, Buffer);
+        
+        try{
+            query = Buffer.getValueAt(0, 0).toString();            
+        }catch(Exception e){
+            query = "";
+        }
+        
+        return query;
     }
     
     public void executeQuery(String query){

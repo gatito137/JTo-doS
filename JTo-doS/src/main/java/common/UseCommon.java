@@ -4,6 +4,8 @@ import java.awt.HeadlessException;
 
 public class UseCommon {
     public final Cache cache = new Cache();
+    public final StringBuilder query = new StringBuilder();
+    public final bridge.Requests execute = new bridge.Requests(cache);
     
     public void msg(String Message){
         javax.swing.JOptionPane.showMessageDialog(null, Message);
@@ -36,7 +38,7 @@ public class UseCommon {
     
     public String input(String Message, String Value){
         try{
-            Message = javax.swing.JOptionPane.showInputDialog(Message, Value);
+            Message = getCleanText(javax.swing.JOptionPane.showInputDialog(Message, Value));
         }catch(HeadlessException e){
             Message = "";
         }
